@@ -72,6 +72,8 @@ public:
 	MapObject* mo[MAP_SIZE][MAP_SIZE];
 
 	Map();
+	Map(int code);
+	Map(const char code[MAP_SIZE * MAP_SIZE + 1]);
 	//Map(Player&, mo[][]);
 	~Map();
 
@@ -84,6 +86,8 @@ public:
 
 	//isCorrect();
 	//void draw();
+
+	void transpose();
 };
 
 

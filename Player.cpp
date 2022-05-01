@@ -1,9 +1,15 @@
-Player::Player(Map& map, int i, int j) : map(map), i(i), j(j), hp(3)
+Player::Player(Map* map, int i, int j) : map(map), i(i), j(j)
 {
+	hp = 3;
 	map->getField(i, j)->is_player_here = true;
 }
 
-bool Player::move(direction)
+Player::~Player()
+{
+	map = nullptr;
+}
+
+bool Player::move(int direction)
 {
 	map->getField(i, j)->is_player_here = false;
 	switch(direction)

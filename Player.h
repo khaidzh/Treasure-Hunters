@@ -20,8 +20,9 @@ private:
 	int armor;
 	//Item* item[N_ITEM]
 public:
-	Player(Map& map, int i, int j); //Map& map
-	bool move(direction);
+	Player(Map* map, int i, int j); //Map& map
+	~Player();
+	bool move(int direction);
 
 	//use(int n);
-}
+};

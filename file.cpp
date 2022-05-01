@@ -6,6 +6,9 @@
 #include "Wall.cpp"
 #include "Column.cpp"
 #include "Map.cpp"
+#include "Player.h"
+#include "Player.cpp"
+#include "another.cpp"
 
 using namespace std;
 
@@ -28,6 +31,7 @@ public:
         }
         void draw()
         {
+                map->transpose();
                 system("clear");
                 for(int i = 0; i < 11; i++)
                 {
@@ -53,7 +57,15 @@ public:
                                             ch[(i-1)*4+2][(j-1)*2+2] = '/';
                                             ch[(i-1)*4+3][(j-1)*2+2] = 'W';
                                             ch[(i-1)*4+4][(j-1)*2+2] = '\\';
-                                            ch[(i-1)*4+3][(j-1)*2+3] = 'P';
+                                            ch[(i-1)*4+3][(j-1)*2+3] = 'M';
+                                        }
+                                        else
+                                        {
+                                            ch[(i-1)*4+3][(j-1)*2+1] = ' ';
+                                            ch[(i-1)*4+2][(j-1)*2+2] = ' ';
+                                            ch[(i-1)*4+3][(j-1)*2+2] = ' ';
+                                            ch[(i-1)*4+4][(j-1)*2+2] = ' ';
+                                            ch[(i-1)*4+3][(j-1)*2+3] = ' ';
                                         }
 
 
@@ -66,7 +78,7 @@ public:
                                             {
                                                     for(int ki = 2; ki < 8; ki++)
                                                     {
-                                                            ch[(i-1)*4+ki][2*j] = '#'; //ch for col
+                                                            ch[(i-1)*4+ki][2*j] = '#';
                                                     }
                                             }
                                             else
@@ -75,6 +87,35 @@ public:
                                                     {
                                                             ch[i*4][2*(j-1)+kj] = '#';
                                                             ch[i*4+1][2*(j-1)+kj] = '#';
+                                                    }
+                                            }
+                                        }
+                                        if(map->mo[i][j]->getCT() == WOOD_WALL)
+                                        {
+                                            if(i % 2 == 1)
+                                            {
+                                                    for(int ki = 2; ki < 8; ki++)
+                                                    {
+                                                            if(ki != 6 && ki != 5)
+                                                                ch[(i-1)*4+ki][2*j] = '#';
+                                                            else
+                                                                ch[(i-1)*4+ki][2*j] = '\'';
+                                                    }
+                                            }
+                                            else
+                                            {
+                                                    for(int kj = 1; kj < 4;kj++)
+                                                    {
+                                                        if(kj != 3)
+                                                        {
+                                                            ch[i*4][2*(j-1)+kj] = '#';
+                                                            ch[i*4+1][2*(j-1)+kj] = '\'';
+                                                        }
+                                                        else
+                                                        {
+                                                            ch[i*4][2*(j-1)+kj] = '#';
+                                                            ch[i*4+1][2*(j-1)+kj] = '#';
+                                                        }
                                                     }
                                             }
                                         }
@@ -89,12 +130,20 @@ public:
                         }
                         cout << endl;
                 }
-                sleep(10);
+                //sleep(10);
+                map->transpose();
         }
 };
 int main()
 {
-        Map map;
+        char code[] = "c4c4c4c4c4c0s2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c4c4c4c4c4c";
+        Map map(code);
+        Player player(&map, 1, 1);
         GameVisual v(&map);
-        v.draw();
+        while (1)
+        {
+            v.draw();
+            int c = getch();
+            player.move(c);
+        }
 }
