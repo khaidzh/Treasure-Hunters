@@ -95,7 +95,7 @@ public:
 
                                         if(map->mo[i][j]->vision() == 0)
                                         {
-                                            ch[(i-1)*4+2][(j-1)*2+6] = '?';
+                                            ch[(i-1)*4+6][(j-1)*2+2] = '?';
                                         }
                                         if(map->mo[i][j]->vision() == 1)
                                         {
