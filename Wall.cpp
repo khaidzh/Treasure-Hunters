@@ -4,6 +4,11 @@ Wall::Wall()
 	type = EMPTY;
 }
 
+Wall::Wall(int type) : type(type)
+{
+	is_discovered = false;
+}
+
 void Wall::setCT(int ct)
 {
 	type = ct;

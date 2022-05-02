@@ -33,9 +33,11 @@ public:
 class Field : public MapObject
 {
 private:
-	//content;
+	PlacedItem* content;
 public:
 	Field();
+	Field(int placed_item_ID);
+	~Field();
 	virtual void setCT(int ct);
 	virtual int getCT() const;
 	virtual bool isEmpty() const;
@@ -48,6 +50,7 @@ private:
 	int type;
 public:
 	Wall();
+	Wall(int type);
 	virtual void setCT(int ct);
 	virtual int getCT() const;
 	virtual bool isEmpty() const;
@@ -74,11 +77,12 @@ public:
 	Map();
 	Map(int code);
 	Map(const char code[MAP_SIZE * MAP_SIZE + 1]);
-	//Map(Player&, mo[][]);
+
 	~Map();
 
 	Field* getField(int i, int j);
 	Wall* getWall(int i, int j);
+	Column* getColumn(int i, int j);
 	// Wall* topWall(int i, int j);
 	// Wall* bottomWall(int i, int j);
 	// Wall* leftWall(int i, int j);

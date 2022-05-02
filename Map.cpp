@@ -37,34 +37,57 @@ Map::Map(const char code[MAP_SIZE * MAP_SIZE + 1])
 		switch(code[i * MAP_SIZE + j])
 		{
 			case 'c':
-				mo[i][j] = new Column;
+				mo[i][j] = new Column();
 				break;
 			case '0':
-				mo[i][j] = new Wall;
+				mo[i][j] = new Wall();
 				break;
 			case '1':
-				mo[i][j] = new Wall;
-				mo[i][j]->setCT(CORRUPTED_WOOD_WALL);
+				mo[i][j] = new Wall(CORRUPTED_WOOD_WALL);
+				//mo[i][j]->setCT(CORRUPTED_WOOD_WALL);
 				break;
 			case '2':
-				mo[i][j] = new Wall;
-				mo[i][j]->setCT(WOOD_WALL);
+				mo[i][j] = new Wall(WOOD_WALL);
+				//mo[i][j]->setCT(WOOD_WALL);
 				break;
 			case '3':
-				mo[i][j] = new Wall;
-				mo[i][j]->setCT(CORRUPTED_IRON_WALL);
+				mo[i][j] = new Wall(CORRUPTED_IRON_WALL);
+				//mo[i][j]->setCT(CORRUPTED_IRON_WALL);
 				break;
 			case '4':
-				mo[i][j] = new Wall;
-				mo[i][j]->setCT(IRON_WALL);
+				mo[i][j] = new Wall(IRON_WALL);
+				//mo[i][j]->setCT(IRON_WALL);
 				break;
 			case ' ':
-				mo[i][j] = new Field;
+				mo[i][j] = new Field();
 				//mo[i][j]->setCT();
 				break;
 			case 's':
-				mo[i][j] = new Field;
+				mo[i][j] = new Field();
 				mo[i][j]->is_player_here = true;
+				break;
+			case 't':
+				mo[i][j] = new Field(TREASURE);
+				break;
+			case 'f':
+				mo[i][j] = new Field(FALSE_TREASURE);
+				//mo[i][j]->setCT();
+				break;
+			case 'd':
+				mo[i][j] = new Field(MINED_TREASURE);
+				//mo[i][j]->setCT();
+				break;
+			case 'm':
+				mo[i][j] = new Field(MINE);
+				//mo[i][j]->setCT();
+				break;
+			case 'p':
+				mo[i][j] = new Field(PIT);
+				//mo[i][j]->setCT();
+				break;
+			case 'w':
+				mo[i][j] = new Field(WEB);
+				//mo[i][j]->setCT();
 				break;
 		}
 }
@@ -79,22 +102,27 @@ Wall* Map::getWall(int i, int j)
 	return (Wall*)mo[i][j];
 }
 
+Column* Map::getColumn(int i, int j)
+{
+	return (Column*)mo[i][j];
+}
+
 /*
 c4c4c4c4c4c
-0 0 0 2 0 4
-c2c202c2c0c
-4 0 0 0 0 4
-c0c2c202c2c
+0 0t0f0d0m4
+c2c2c2c2c0c
+4 0 0 0w0p4
+c0c2c2c2c2c
 4 0 0 2 0 4
 c2c2c0c0c0c
 4 0 2 0 2 4
-c0c2c202c0c
+c0c2c2c2c0c
 4 0 0 0 0 4
 c4c4c4c4c4c
 */
 
 /*
-char* Map::encode()
+const char* Map::encode()
 {
 	char code[MAP_SIZE * MAP_SIZE + 1]
 	for (int i = 0; i < MAP_SIZE; i++)

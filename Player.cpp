@@ -1,6 +1,8 @@
 Player::Player(Map* map, int i, int j) : map(map), i(i), j(j)
 {
 	hp = 3;
+	armor = 0;
+	money = 10;
 	map->getField(i, j)->is_player_here = true;
 	map->getField(i, j)->discover();
 	map->getWall(i - 1, j)->discover();

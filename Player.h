@@ -16,10 +16,11 @@ private:
 	Map* map;
 	int i;
 	int j;
-	int hp;
-	int armor;
 	//Item* item[N_ITEM]
 public:
+	int hp;
+	int armor;
+	int money;
 	Player(Map* map, int i, int j); //Map& map
 	~Player();
 	int check(bool& code);
