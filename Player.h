@@ -22,6 +22,7 @@ private:
 public:
 	Player(Map* map, int i, int j); //Map& map
 	~Player();
+	int check(bool& code);
 	bool move(int direction);
 
 	//use(int n);

@@ -22,8 +22,8 @@ protected:
 	bool is_discovered;
 public:
 	bool is_player_here;
-	void discover();
 	bool vision() const;
+	void discover();
 	virtual void setCT(int ct) = 0;
 	virtual int getCT() const = 0;
 	virtual bool isEmpty() const = 0;
@@ -36,10 +36,10 @@ private:
 	//content;
 public:
 	Field();
-	virtual void setCT(int ct) override;
-	virtual int getCT() const override;
-	virtual bool isEmpty() const override;
-	virtual int whoami() const override;
+	virtual void setCT(int ct);
+	virtual int getCT() const;
+	virtual bool isEmpty() const;
+	virtual int whoami() const;
 };
 
 class Wall : public MapObject
@@ -48,10 +48,10 @@ private:
 	int type;
 public:
 	Wall();
-	virtual void setCT(int ct) override;
-	virtual int getCT() const override;
-	virtual bool isEmpty() const override;
-	virtual int whoami() const override;
+	virtual void setCT(int ct);
+	virtual int getCT() const;
+	virtual bool isEmpty() const;
+	virtual int whoami() const;
 	//void damage();
 };
 
@@ -59,10 +59,10 @@ class Column : public MapObject
 {
 public:
 	Column();
-	virtual void setCT(int ct) override;
-	virtual int getCT() const override;
-	virtual bool isEmpty() const override;
-	virtual int whoami() const override;
+	virtual void setCT(int ct);
+	virtual int getCT() const;
+	virtual bool isEmpty() const;
+	virtual int whoami() const;
 };
 
 class Map

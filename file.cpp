@@ -242,7 +242,7 @@ public:
 };
 int main()
 {
-        char code[] = "c4c4c4c4c4c0s2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c2c2c2c2c2c4 2 2 2 2 4c4c4c4c4c4c";
+        char code[] = "c4c4c4c4c4c0 0 0 0 0 4c2c202c2c0c4 0 0 0 0 4c0c2c202c2c4 0 0 2 0 4c2c2c0c0c0c4 0 2 0 2 4c0c2c202c0c4 0 0 0 0 4c4c4c4c4c4c";
         Map map(code);
         Player player(&map, 1, 1);
         GameVisual v(&map);

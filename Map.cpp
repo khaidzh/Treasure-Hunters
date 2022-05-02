@@ -81,15 +81,15 @@ Wall* Map::getWall(int i, int j)
 
 /*
 c4c4c4c4c4c
-0 2 2 2 2 4
-c2c2c2c2c2c
-4 2 2 2 2 4
-c2c2c2c2c2c
-4 2 2 2 2 4
-c2c2c2c2c2c
-4 2 2 2 2 4
-c2c2c2c2c2c
-4 2 2 2 2 4
+0 0 0 2 0 4
+c2c202c2c0c
+4 0 0 0 0 4
+c0c2c202c2c
+4 0 0 2 0 4
+c2c2c0c0c0c
+4 0 2 0 2 4
+c0c2c202c0c
+4 0 0 0 0 4
 c4c4c4c4c4c
 */
 

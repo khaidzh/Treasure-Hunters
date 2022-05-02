@@ -2,6 +2,11 @@ Player::Player(Map* map, int i, int j) : map(map), i(i), j(j)
 {
 	hp = 3;
 	map->getField(i, j)->is_player_here = true;
+	map->getField(i, j)->discover();
+	map->getWall(i - 1, j)->discover();
+	map->getWall(i + 1, j)->discover();
+	map->getWall(i, j - 1)->discover();
+	map->getWall(i, j + 1)->discover();
 }
 
 Player::~Player()
@@ -9,36 +14,40 @@ Player::~Player()
 	map = nullptr;
 }
 
+int Player::check(bool& code)
+{
+	code = true;
+	return code;
+}
+
 bool Player::move(int direction)
 {
+	bool code;
 	map->getField(i, j)->is_player_here = false;
 	switch(direction)
 	{
 		case UP:
-			if (i == TOP_BORDER)
-				break;
-			else
-				i -= STEP;
+			if (code = map->getWall(i - 1, j)->isEmpty())
+				(i == TOP_BORDER) ? check(code) : (i -= STEP);
 			break;
 		case DOWN:
-			if (i == BOTTOM_BORDER)
-				break;
-			else
-				i += STEP;
+			if (code = map->getWall(i + 1, j)->isEmpty())
+				(i == BOTTOM_BORDER) ? check(code) : (i += STEP);
 			break;
 		case LEFT:
-			if (j == LEFT_BORDER)
-				break;
-			else
-				j -= STEP;
+			if (code = map->getWall(i, j - 1)->isEmpty())
+				(j == LEFT_BORDER) ? check(code) : (j -= STEP);
 			break;
 		case RIGHT:
-			if (j == RIGHT_BORDER)
-				break;
-			else
-				j += STEP;
+			if (code = map->getWall(i, j + 1)->isEmpty())
+				(j == RIGHT_BORDER) ? check(code) : (j += STEP);
 			break;
 	}
 	map->getField(i, j)->is_player_here = true;
-	return true;
+	map->getField(i, j)->discover();
+	map->getWall(i - 1, j)->discover();
+	map->getWall(i + 1, j)->discover();
+	map->getWall(i, j - 1)->discover();
+	map->getWall(i, j + 1)->discover();
+	return code;
 }
