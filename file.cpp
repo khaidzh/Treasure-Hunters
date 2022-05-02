@@ -31,13 +31,13 @@ public:
         }
         void draw_content(int i, int j, int t)
         {
-            string c;
+            string s;
             if(t == 0)
-                c = "         ";
+                s = "         ";
             if(t == 1)
-                c = "   ___[_]";
+                s = "   ___[_]";
             if(t == 2)
-                c = "    _ CID";
+                s = "    _ CID";
 
 
                 //so on
