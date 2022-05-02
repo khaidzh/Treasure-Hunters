@@ -11,7 +11,17 @@
 #include "another.cpp"
 
 using namespace std;
-
+/*
+enum PlacedItemID
+{
+NOTHING,
+TREASURE,
+FALSE_TREASURE,
+MINED_TREASURE,
+MINE,
+PIT,
+WEB
+};*/
 class GameVisual
 {
 private:
@@ -37,7 +47,15 @@ public:
             if(t == 1)
                 s = "   ___[_]";
             if(t == 2)
+                s = "   ___[_]";
+            if(t == 3)
+                s = "   ___[_]";
+            if(t == 4)
                 s = "    _ CID";
+            if(t == 5)
+                s = "      \\ /";
+            if(t == 6)
+                s = "/#\\###\\#/";
 
 
                 //so on
