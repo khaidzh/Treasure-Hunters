@@ -8,6 +8,7 @@
 #include "Wall.cpp"
 #include "Column.cpp"
 #include "Map.cpp"
+#include "GameVisual.cpp"
 #include "Player.h"
 #include "Player.cpp"
 #include "another.cpp"
