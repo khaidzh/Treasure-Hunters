@@ -58,8 +58,12 @@ public:
                 s = "      \\ /";
             if(t == 6)
                 s = "/X\\XXX\\X/";
-
-
+            if(t == 4000)
+                s = "    _ CID";
+            if(t == 4001)
+                s = "*********";
+            if(t == 4002)
+                s = "Off _ CID";
                 //so on
 
 
@@ -259,16 +263,38 @@ public:
                 //sleep(10);
                 map->transpose();
         }
+        //num_anim = mo[i][j]->getCT();
+        void animation(int xj, int xi)
+        {
+                draw();
+                for(int k = 0; k < 2; k++)
+                {
+                        draw_content(map->mo[xi][xj]->getCT()*1000+k);
+                        system("clear");
+                        for(int j = 0; j < 21; j++)
+                        {
+                              for(int i = 0; i < 42; i++)
+                              {
+                                      cout << ch[i][j];
+                              }
+                        cout << endl;
+                        }
+                        sleep(1);
+                }
+                
+                
+        }
 };
 int main()
 {
         char code[] = "c4c4c4c4c4c0 0t0f0d0m4c1c3c1c3c0c4 0 0 0w0p4c0c2c2c2c2c4 0 0 2 0 4c2c2c0c0c0c4 0 2 0 2 4c0c2c2c2c0c4 0 0 0 0 4c4c4c4c4c4c";
         Map map(code);
-        Player player(&map, 1, 1);
-        GameVisual v(&map);
+        GameVisual visual(&map);
+        Player player(&map, &visual, 1, 1);
+        
         while (1)
         {
-            v.draw();
+            visual.draw();
             int c = getch();
             player.move(c);
         }
