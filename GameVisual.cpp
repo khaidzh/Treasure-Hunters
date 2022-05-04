@@ -263,7 +263,7 @@ public:
                 //sleep(10);
                 map->transpose();
         }
-        void Update_stat(int turns, int hp, int armor)
+        void update_stat(int turns, int hp, int armor)
         {
                 ch[59][0] = '0' + (turns % 10);
                 ch[58][0] = '0' + (turns / 10);
