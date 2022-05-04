@@ -52,6 +52,32 @@ public:
                 s = "      \\ /";
             if(t == 6)
                 s = "/X\\XXX\\X/";
+                
+                
+                
+            if(t == 1000)
+                s = "===$$$==="; 
+            if(t == 1001)
+                s = "^ ^   \_//";
+            if(t == 1002)
+                s = "YouWon!!!";
+             
+                
+                
+            if(t == 2000)
+                s = "         ";
+            if(t == 2001)
+                s = "   ???   ";
+            if(t == 2002)
+                s = "         ";
+            
+            if(t == 3000)
+                s = "*********";
+            if(t == 3001)
+                s = "Off _ CID";
+            if(t == 3002)
+                s = "         ";
+                
             if(t == 4000)
                 s = "    _ CID";
             if(t == 4001)
@@ -277,6 +303,24 @@ public:
                 ch[59][4] = '0' + (armor % 10);         
         }
         //num_anim = mo[i][j]->getCT();
+        void treasure_animation(int xi, int xj, int t)
+        {
+                    draw();
+                    for(int k = 0; k < 3; k++)
+                    {
+                                draw_content(xj, xi, t*1000+k);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                              cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+        }
         void animation(int xi, int xj)
         {
                 
