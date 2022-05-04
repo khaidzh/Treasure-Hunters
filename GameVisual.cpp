@@ -303,7 +303,7 @@ public:
                 ch[59][4] = '0' + (armor % 10);         
         }
         //num_anim = mo[i][j]->getCT();
-        void treasure_animation(int xi, int xj, int t)
+        void treasureAnimation(int xi, int xj, int t)
         {
                     draw();
                     for(int k = 0; k < 3; k++)
