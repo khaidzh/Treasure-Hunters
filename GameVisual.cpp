@@ -243,12 +243,12 @@ public:
                 map->transpose();
         }
         //num_anim = mo[i][j]->getCT();
-        void animation(int xj, int xi)
+        void animation(int xi, int xj)
         {
                 draw();
                 for(int k = 0; k < 2; k++)
                 {
-                        draw_content(xi, xj, map->mo[xi][xj]->getCT()*1000+k);
+                        draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
                         system("clear");
                         for(int j = 0; j < 21; j++)
                         {
