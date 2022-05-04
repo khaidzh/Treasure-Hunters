@@ -58,6 +58,12 @@ public:
                 s = "*********";
             if(t == 4002)
                 s = "Off _ CID";
+            if(t == 5000)
+                s = "      \\P/";
+            if(t == 5001)
+                s = "    P \\W/";
+            if(t == 5002)
+                s = " P /W\\_M/";
             if(t == 6000)
                 s = "/X\\XXX\\X/";
             if(t == 6001)
@@ -291,6 +297,26 @@ public:
                                 }
                                 sleep(1);
                     }
+                }
+                if(t == PIT)
+                { 
+                    map->mo[i][j]->is_player_here == 0;
+                    for(int k = 0; k < 3; k++)
+                    {
+                                draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    map->mo[i][j]->is_player_here == 1;
+                    
                 }
                 
         }
