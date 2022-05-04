@@ -85,7 +85,7 @@ public:
             if(t == 4002)
                 s = "   -2!   ";
             if(t == 5000)
-                s = "      \\P/";
+                s = "   -1!\\P/";
             if(t == 5001)
                 s = "    P \\W/";
             if(t == 5002)
@@ -303,7 +303,7 @@ public:
                 ch[59][4] = '0' + (armor % 10);         
         }
         //num_anim = mo[i][j]->getCT();
-        void treasureAnimation(int xi, int xj, int t)
+        void treasureAnimate(int xi, int xj, int t)
         {
                     draw();
                     for(int k = 0; k < 3; k++)
