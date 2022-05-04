@@ -16,6 +16,10 @@ public:
                 }
 
         }
+        void get_map()
+        {
+                return map;
+        }
         void draw_content(int i, int j, int t)
         {
             string s;
@@ -244,7 +248,7 @@ public:
                 draw();
                 for(int k = 0; k < 2; k++)
                 {
-                        draw_content(map->mo[xi][xj]->getCT()*1000+k);
+                        draw_content(xi, xj, map->mo[xi][xj]->getCT()*1000+k);
                         system("clear");
                         for(int j = 0; j < 21; j++)
                         {
