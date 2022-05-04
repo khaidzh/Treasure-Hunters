@@ -16,7 +16,7 @@ public:
                 }
 
         }
-        map * getMap()
+        Map * getMap()
         {
                 return map;
         }
@@ -246,7 +246,7 @@ public:
         void animation(int xi, int xj)
         {
                 draw();
-                for(int k = 0; k < 2; k++)
+                for(int k = 0; k < 3; k++)
                 {
                         draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
                         system("clear");
