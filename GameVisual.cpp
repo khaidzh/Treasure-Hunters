@@ -43,6 +43,12 @@ public:
                 s = "*********";
             if(t == 4002)
                 s = "Off _ CID";
+            if(t == 6000)
+                s = "/X\\XXX\\X/";
+            if(t == 6001)
+                s = "   XXX\\X/";
+            if(t == 6002)
+                s = "      \\X/";
                 //so on
 
 
@@ -246,21 +252,24 @@ public:
         void animation(int xi, int xj)
         {
                 draw();
-                for(int k = 0; k < 3; k++)
+                int t = map->mo[xi][xj]->getCT();
+                if(t == MINE || t == WEB)
                 {
-                        draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
-                        system("clear");
-                        for(int j = 0; j < 21; j++)
-                        {
-                              for(int i = 0; i < 42; i++)
-                              {
-                                      cout << ch[i][j];
-                              }
-                        cout << endl;
-                        }
-                        sleep(1);
+                    for(int k = 0; k < 3; k++)
+                    {
+                                draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 42; i++)
+                                {
+                                              cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
                 }
-                
                 
         }
 };
