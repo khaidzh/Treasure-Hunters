@@ -301,7 +301,7 @@ public:
                 }
                 if(t == PIT)
                 { 
-                    map->mo[i][j]->is_player_here = 0;
+                    map->mo[xi][xj]->is_player_here = 0;
                     draw();
                     for(int k = 0; k < 3; k++)
                     {
@@ -317,7 +317,7 @@ public:
                                 }
                                 sleep(1);
                     }
-                    map->mo[i][j]->is_player_here = 1;
+                    map->mo[xi][xj]->is_player_here = 1;
                     
                 }
                 
