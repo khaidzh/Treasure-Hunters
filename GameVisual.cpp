@@ -279,10 +279,11 @@ public:
         //num_anim = mo[i][j]->getCT();
         void animation(int xi, int xj)
         {
-                draw();
+                
                 int t = map->mo[xi][xj]->getCT();
                 if(t == MINE || t == WEB)
                 {
+                    draw();
                     for(int k = 0; k < 3; k++)
                     {
                                 draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
@@ -301,6 +302,7 @@ public:
                 if(t == PIT)
                 { 
                     map->mo[i][j]->is_player_here == 0;
+                    draw();
                     for(int k = 0; k < 3; k++)
                     {
                                 draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
