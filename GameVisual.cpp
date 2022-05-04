@@ -16,7 +16,7 @@ public:
                 }
 
         }
-        void get_map()
+        map * get_map()
         {
                 return map;
         }
