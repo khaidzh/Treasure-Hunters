@@ -2,18 +2,33 @@ using namespace std;
 class GameVisual
 {
 private:
-        char ch[42][21];
+        char ch[60][21];
         Map* map;
 public:
         GameVisual(Map* map /*mo[11][11]*/) : map(map)
         {
-                for(int i = 0; i < 42; i++)
+                for(int i = 0; i < 60; i++)
                 {
                         for(int j = 0; j < 21; j++)
                         {
                                 ch[i][j] = ' ';
                         }
                 }
+                ch[43][0] = 'T';
+                ch[44][0] = 'u';
+                ch[45][0] = 'r';
+                ch[46][0] = 'n';
+                ch[47][0] = 's';
+                ch[48][0] = ':';
+                ch[43][2] = 'H';
+                ch[44][2] = 'P';
+                ch[45][2] = ':';
+                ch[43][4] = 'A';
+                ch[44][4] = 'r';
+                ch[45][4] = 'm';
+                ch[46][4] = 'o';
+                ch[47][4] = 'r';
+                ch[48][4] = ':';
 
         }
         Map * getMap()
@@ -239,7 +254,7 @@ public:
                 }
                 for(int j = 0; j < 21; j++)
                 {
-                        for(int i = 0; i < 42; i++)
+                        for(int i = 0; i < 60; i++)
                         {
                                 cout << ch[i][j];
                         }
@@ -247,6 +262,13 @@ public:
                 }
                 //sleep(10);
                 map->transpose();
+        }
+        void Update_stat(int turns, int hp, int armor)
+        {
+                ch[59][0] = '0' + (turns % 10);
+                ch[58][0] = '0' + (turns / 10);
+                ch[59][2] = '0' + (hp % 10);
+                ch[59][4] = '0' + (armor % 10);         
         }
         //num_anim = mo[i][j]->getCT();
         void animation(int xi, int xj)
@@ -261,7 +283,7 @@ public:
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
-                                for(int i = 0; i < 42; i++)
+                                for(int i = 0; i < 60; i++)
                                 {
                                               cout << ch[i][j];
                                 }
