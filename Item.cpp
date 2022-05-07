@@ -1,7 +1,7 @@
-void Item::purchase()
-{
+//void Item::purchase()
+//{
 	//money -= cost;
-}
+//}
 
 bool PlacedItem::vision()
 {

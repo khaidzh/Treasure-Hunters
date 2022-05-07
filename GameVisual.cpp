@@ -37,9 +37,10 @@ public:
         }
         void draw_all_content(int i, int j, int t, int tr)
         {
+            string s;
             if(t == HAMMER * 1000)
             {
-                    s = " P    /M\-I  M    ";
+                    s = " P    /M\\-I  M    ";
             }
             if(t == HAMMER * 1000 + 1)
             {
@@ -47,11 +48,11 @@ public:
             }
             if(t == HAMMER * 1000 + 2)
             {
-                   s = " P    /M\-I  M    ";
+                   s = " P    /M\\-I  M    ";
             }
             if(t == BAIT * 1000)
             {
-                    s = " P    /M\,   M    ";
+                    s = " P    /M\\,   M    ";
             }
             if(t == BAIT * 1000 + 1)
             {
@@ -59,11 +60,11 @@ public:
             }
             if(t == BAIT * 1000 + 2)
             {
-                    s = " P    /M\    M    ";
+                    s = " P    /M\\    M    ";
             }
             if(t == GRENADE * 1000)
             {
-                    s = " P    /M\o   M    ";
+                    s = " P    /M\\o   M    ";
             }
             if(t == GRENADE * 1000 + 1)
             {
@@ -71,7 +72,7 @@ public:
             }
             if(t == GRENADE * 1000 + 2)
             {
-                    s = " P    /M\    M    ";
+                    s = " P    /M\\    M    ";
             }
             if(t == GRENADE * 1000 + 102)
             {
@@ -375,6 +376,7 @@ public:
                 }
                 //sleep(10);
                 map->transpose();
+                std::cout << "draw done\n"; sleep(3);
         }
         void updateStat(int turns, int hp, int armor)
         {
@@ -447,7 +449,7 @@ public:
                 }
                 
         }
-        void itemAnimation(int t, int xi, int xj, int xie, int xje)
+        void itemAnimation(int t, int xi, int xj, int xie = 0, int xje = 0)
         {
                 if(t == HAMMER || t == BAIT)
                 { 

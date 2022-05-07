@@ -2,29 +2,48 @@ const char UP = 'w';
 const char DOWN = 's';
 const char LEFT = 'a';
 const char RIGHT = 'd';
-
-const int STEP = 2;
+const char PICKUP = 'e';
 
 const int TOP_BORDER = 1;
 const int BOTTOM_BORDER = 9;
 const int LEFT_BORDER = 1;
 const int RIGHT_BORDER = 9;
 
+const int STEP = 2;
+const int WIN_CODE = 1000;
+
 class Player
 {
 private:
 	Map* map;
+	GameVisual* gv;
 	int i;
 	int j;
-	//Item* item[N_ITEM]
-public:
 	int hp;
 	int armor;
 	int money;
-	Player(Map* map, int i, int j); //Map& map
-	~Player();
-	int check(bool& code);
-	bool move(int direction);
+	int number_of_moves;
 
-	//use(int n);
+	int treasure;
+	int detector;
+	bool isShod;
+public:
+	std::pair<int, int> inventory[5]; //(ID, number)
+	Player(GameVisual* gv, int i, int j); //Map& map
+	~Player();
+
+	GameVisual* getGV();
+	std::pair<int, int> getPosition() const;
+
+	void addMove(int number = 1);
+	void getDamaged(int damage);
+	//void setEquipment();
+
+	bool isAlive() const;
+	bool isPlaying() const;
+
+	int check(bool& code);
+	int move(int direction, bool repeat = false);
+
+	bool useItem(int n);
 };

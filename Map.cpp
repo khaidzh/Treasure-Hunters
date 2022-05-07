@@ -107,24 +107,42 @@ Column* Map::getColumn(int i, int j)
 	return (Column*)mo[i][j];
 }
 
+void Map::discoverField(int i, int j)
+{	
+	mo[i][j]->discover();
+	mo[i - 1][j]->discover();
+	mo[i + 1][j]->discover();
+	mo[i][j - 1]->discover();
+	mo[i][j + 1]->discover();
+}
+
+
+void Map::destroyField(int i, int j)
+{
+	if (mo[i][j]->getCT() != TREASURE)
+		mo[i][j]->setCT(NOTHING);
+	mo[i - 1][j]->setCT(EMPTY);
+	mo[i + 1][j]->setCT(EMPTY);
+	mo[i][j - 1]->setCT(EMPTY);
+	mo[i][j + 1]->setCT(EMPTY);
+}
 /*
 c4c4c4c4c4c
 0 0t0f0d0m4
 c2c2c2c2c0c
 4 0 0 0w0p4
-c0c2c2c2c2c
+c0c0c2c2c2c
 4 0 0 2 0 4
-c2c2c0c0c0c
-4 0 2 0 2 4
+c0c0c0c0c0c
+4 0 0 0 0 4
 c0c2c2c2c0c
 4 0 0 0 0 4
 c4c4c4c4c4c
 */
 
-/*
-const char* Map::encode()
+char* Map::encode() const
 {
-	char code[MAP_SIZE * MAP_SIZE + 1]
+	char* code = new char[MAP_SIZE * MAP_SIZE + 1];
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
 		{
@@ -134,13 +152,40 @@ const char* Map::encode()
 				case COLUMN:
 					c = 'c';
 					break;
-				case 
+				case WALL:
+					c = '0' + mo[i][j]->getCT();
+					break;
+				case FIELD:
+					switch(mo[i][j]->getCT())
+					{
+						case NOTHING:
+							c = ' ';
+							break;
+						case TREASURE:
+							c = 't';
+							break;
+						case FALSE_TREASURE:
+							c = 'f';
+							break;
+						case MINED_TREASURE:
+							c = 'd';
+							break;
+						case MINE:
+							c = 'm';
+							break;
+						case PIT:
+							c = 'p';
+							break;
+						case WEB:
+							c = 'w';
+							break;
+					}
+					break;
 			}
 		}
 	code[MAP_SIZE * MAP_SIZE] = '\n';
 	return code;
 }
-*/
 
 
 /*

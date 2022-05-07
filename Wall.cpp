@@ -28,3 +28,13 @@ int Wall::whoami() const
 {
 	return WALL;
 }
+
+bool Wall::damage(int damage)
+{
+	if (isEmpty())
+		return false;
+	type -= damage;
+	if (type < 0)
+		type = 0;
+	return true;
+}

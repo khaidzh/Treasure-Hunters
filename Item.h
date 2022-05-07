@@ -9,6 +9,23 @@ enum PlacedItemID
 	WEB
 };
 
+enum HandItemID
+{
+	CROSSBOW,
+	BAIT,
+	HAMMER,
+	ROCKET,
+	GRENADE,
+	POTION
+};
+
+enum ItemDamage
+{
+	NULL_DAMAGE,
+	PIT_DAMAGE,
+	MINE_DAMAGE
+};
+
 class Item
 {
 protected:
@@ -16,7 +33,7 @@ protected:
 	//int available_number;
 public:
 	//Item();
-	void purchase();
+	//void purchase();
 };
 
 class PlacedItem : public Item
@@ -25,6 +42,7 @@ private:
 	bool visionable;
 public:
 	bool vision();
+	void discover();
 	virtual int getID() const = 0;
 	//virtual activation() = 0;
 };

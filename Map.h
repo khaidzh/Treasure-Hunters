@@ -22,8 +22,10 @@ protected:
 	bool is_discovered;
 public:
 	bool is_player_here;
+	bool is_pointed;
 	bool vision() const;
 	void discover();
+
 	virtual void setCT(int ct) = 0;
 	virtual int getCT() const = 0;
 	virtual bool isEmpty() const = 0;
@@ -38,6 +40,10 @@ public:
 	Field();
 	Field(int placed_item_ID);
 	~Field();
+
+	bool activate(GameVisual* gv, int i, int j);
+	void activatedBy(Player* player);
+
 	virtual void setCT(int ct);
 	virtual int getCT() const;
 	virtual bool isEmpty() const;
@@ -51,11 +57,13 @@ private:
 public:
 	Wall();
 	Wall(int type);
+
+	bool damage(int damage);
+
 	virtual void setCT(int ct);
 	virtual int getCT() const;
 	virtual bool isEmpty() const;
 	virtual int whoami() const;
-	//void damage();
 };
 
 class Column : public MapObject
@@ -80,9 +88,14 @@ public:
 
 	~Map();
 
+	char* encode() const;
+
 	Field* getField(int i, int j);
 	Wall* getWall(int i, int j);
 	Column* getColumn(int i, int j);
+
+	void discoverField(int i, int j);
+	void destroyField(int i, int j);
 	// Wall* topWall(int i, int j);
 	// Wall* bottomWall(int i, int j);
 	// Wall* leftWall(int i, int j);

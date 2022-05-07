@@ -2,7 +2,7 @@ Field::Field()
 {
 	is_discovered = false;
 	is_player_here = false;	
-	content = new Nothing();
+	content = new Nothing;
 }
 
 Field::~Field()
@@ -60,3 +60,48 @@ int Field::whoami() const
 {
 	return FIELD;
 }
+
+bool Field::activate(GameVisual* gv, int i, int j)
+{
+	if (content->getID() == MINE)
+	{
+		gv->animation(i, j);
+ 		delete content;
+		content = new Nothing;
+		//content->discover();
+		return true;
+	}
+	return false;
+}
+
+void Field::activatedBy(Player* player)
+{
+	player->getGV()->animation(player->getPosition().first, player->getPosition().second);
+	switch(content->getID())
+	{
+		case MINE:
+			player->getDamaged(MINE_DAMAGE);
+
+ 			delete content;
+			content = new Nothing;
+			break;
+		case WEB:
+			player->addMove(4);
+
+ 			delete content;
+			content = new Nothing;
+			break;
+		case PIT:
+			player->getDamaged(PIT_DAMAGE);
+			player->addMove(3);
+
+ 			delete content;
+			content = new Nothing;
+			break;
+	}
+}
+
+// PlacedItem* Field::getContent()
+// {
+// 	return content;
+// }
