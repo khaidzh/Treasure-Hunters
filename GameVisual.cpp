@@ -35,6 +35,87 @@ public:
         {
                 return map;
         }
+        void draw_all_content(int i, int j, int t, int tr)
+        {
+            if(t == HAMMER * 1000)
+            {
+                    s = " P    /M\-I  M    ";
+            }
+            if(t == HAMMER * 1000 + 1)
+            {
+                    s = " P/-I /W     M    ";
+            }
+            if(t == HAMMER * 1000 + 2)
+            {
+                   s = " P    /M\-I  M    ";
+            }
+            if(t == BAIT * 1000)
+            {
+                    s = " P    /M\,   M    ";
+            }
+            if(t == BAIT * 1000 + 1)
+            {
+                    s = " P/ ' /W     M    ";
+            }
+            if(t == BAIT * 1000 + 2)
+            {
+                    s = " P    /M\    M    ";
+            }
+            if(t == GRENADE * 1000)
+            {
+                    s = " P    /M\o   M    ";
+            }
+            if(t == GRENADE * 1000 + 1)
+            {
+                    s = " P/ o /W     M    ";
+            }
+            if(t == GRENADE * 1000 + 2)
+            {
+                    s = " P    /M\    M    ";
+            }
+            if(t == GRENADE * 1000 + 102)
+            {
+                    s = "******************";
+            }
+            if(t == ROCKET * 1000)
+            {
+                    s = "* * * * * * * * * ";
+            }
+            if(t == ROCKET * 1000 + 1)
+            {
+                    s = " * * * * * * * * *";
+            }
+            if(t == ROCKET * 1000 + 2)
+            {
+                    s = "* * * * * * * * * ";
+            }
+            if(tr == 1)
+            {
+                    s[16] = '[';
+                    s[17] = ']';
+            }
+                
+            ch[(i-1)*4+2][(j-1)*2+1] = s[0];
+            ch[(i-1)*4+3][(j-1)*2+1] = s[1];
+            ch[(i-1)*4+4][(j-1)*2+1] = s[2];
+            ch[(i-1)*4+5][(j-1)*2+1] = s[3];
+            ch[(i-1)*4+6][(j-1)*2+1] = s[4];
+            ch[(i-1)*4+7][(j-1)*2+1] = s[5];
+            ch[(i-1)*4+2][(j-1)*2+2] = s[6];
+            ch[(i-1)*4+3][(j-1)*2+2] = s[7];
+            ch[(i-1)*4+4][(j-1)*2+2] = s[8];                
+            
+            ch[(i-1)*4+5][(j-1)*2+2] = s[9];
+            ch[(i-1)*4+6][(j-1)*2+2] = s[10];
+            ch[(i-1)*4+7][(j-1)*2+2] = s[11];
+            ch[(i-1)*4+2][(j-1)*2+3] = s[12];
+            ch[(i-1)*4+3][(j-1)*2+3] = s[13];
+            ch[(i-1)*4+4][(j-1)*2+3] = s[14];
+            ch[(i-1)*4+5][(j-1)*2+3] = s[15];
+            ch[(i-1)*4+6][(j-1)*2+3] = s[16];
+            ch[(i-1)*4+7][(j-1)*2+3] = s[17];
+                
+        }
         void draw_content(int i, int j, int t)
         {
             string s;
@@ -350,6 +431,94 @@ public:
                     for(int k = 0; k < 3; k++)
                     {
                                 draw_content(xj, xi, map->mo[xi][xj]->getCT()*1000+k);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    map->mo[xi][xj]->is_player_here = 1;
+                    
+                }
+                
+        }
+        void itemAnimation(int t, int xi, int xj, int xie, int xje)
+        {
+                if(t == HAMMER || t == BAIT)
+                { 
+                    map->mo[xi][xj]->is_player_here = 0;
+                    draw();
+                    int tr;
+                    for(int k = 0; k < 3; k++)
+                    {
+                                tr = 0;
+                                if(map->mo[xi][xj]->getCT() >= 2 && map->mo[xi][xj]->getCT() <= 4)
+                                        tr = 1;
+                                draw_all_content(xj, xi, t * 1000 + k, tr);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    map->mo[xi][xj]->is_player_here = 1;
+                    
+                }
+                if(t == GRENADE)
+                { 
+                    map->mo[xi][xj]->is_player_here = 0;
+                    draw();
+                    int tr;
+                    for(int k = 0; k < 3; k++)
+                    {
+                                tr = 0;
+                                if(map->mo[xi][xj]->getCT() >= 2 && map->mo[xi][xj]->getCT() <= 4)
+                                        tr = 1;
+                                draw_all_content(xj, xi, t * 1000 + k, tr);
+                                if(k == 2)
+                                        draw_all_content(xje, xie, t * 1000 + 102, tr); //100 * 1 is additional second(first from 0) field modifier
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    map->mo[xi][xj]->is_player_here = 1;
+                    
+                }
+                if(t == ROCKET)
+                { 
+                    map->mo[xi][xj]->is_player_here = 0;
+                    draw();
+                    int tr;
+                    for(int k = 0; k < 3; k++)
+                    {
+                                tr = 0;
+                                //animation is wrong:: highlights 2 ceils and draws false treasure
+                                draw_all_content(xj, xi, t * 1000 + k, tr);
+                                if(xj + 2 >= 1 && xj + 2 <= 9 && xi + 2 >= 1 && xi + 2 <= 9)
+                                         draw_all_content(xj + 2, xi + 2, t * 1000 + k, tr);
+                                if(xj - 2 >= 1 && xj - 2 <= 9 && xi + 2 >= 1 && xi + 2 <= 9)
+                                         draw_all_content(xj - 2, xi + 2, t * 1000 + k, tr);
+                                if(xj + 2 >= 1 && xj + 2 <= 9 && xi - 2 >= 1 && xi - 2 <= 9)
+                                         draw_all_content(xj + 2, xi - 2, t * 1000 + k, tr);
+                                if(xj - 2 >= 1 && xj - 2 <= 9 && xi - 2 >= 1 && xi - 2 <= 9)
+                                         draw_all_content(xj - 2, xi - 2, t * 1000 + k, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
