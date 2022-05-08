@@ -85,7 +85,7 @@ public:
             }
             if(t == POTION * 1000 + 1)
             {
-                    s = " P   /W\\     M    ";
+                    s = " P    /W\\    M    ";
             }
             if(t == POTION * 1000 + 2)
             {
@@ -111,6 +111,22 @@ public:
             if(t == ROCKET * 1000 + 2)
             {
                     s = "* * * * * * * * * ";
+            }
+            if(t == CROSSBOW * 1000)
+            {
+                    s = " ^     |          ";
+            }
+            if(t == CROSSBOW * 1000 + 1)
+            {
+                    s = "      <-          ";
+            }
+            if(t == CROSSBOW * 1000 + 2)
+            {
+                    s = "       |     v    ";
+            }
+            if(t == CROSSBOW * 1000 + 3)
+            {
+                    s = "       ->         ";
             }
             if(tr == 1)
             {
@@ -579,8 +595,56 @@ public:
                                 if(map->mo[xi][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
                                         tr = 1;
                                 draw_all_content(xj, xi, t * 1000 + k, tr);
-                                if(k == 1 || k == 2)
+                                if((k == 1 || k == 2) && (xje == -1 || xie == -1))        
                                         draw_all_content(xje, xie, t * 1000 + 100 + k, 0);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    
+                }
+                if(t == CROSSBOW && (xie == 0 || xie == 2))
+                { 
+                    map->mo[xi][xj]->is_player_here = 0;
+                    draw();
+                    int tr;
+                    for(int k = 2; k < xje; k++)
+                    {
+                                tr = 0;
+                                if(map->mo[xi][xj + xje * (-1 + xie)]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
+                                        tr = 1;
+                                draw_all_content(xj + xje * (-1 + xie), xi, t * 1000 + xie, tr);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    map->mo[xi][xj]->is_player_here = 1;
+                    
+                }
+                if(t == CROSSBOW && (xie == 1 || xie == 3))
+                { 
+                    draw();
+                    int tr;
+                    for(int k = 2; k < xje; k++)
+                    {
+                                tr = 0;
+                                if(map->mo[xi + xje * (-2 + xie)][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
+                                        tr = 1;
+                                draw_all_content(xj, xi + xje * (-2 + xie), t * 1000 + k, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
