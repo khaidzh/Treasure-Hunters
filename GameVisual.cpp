@@ -595,7 +595,7 @@ public:
                                 if(map->mo[xi][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
                                         tr = 1;
                                 draw_all_content(xj, xi, t * 1000 + k, tr);
-                                if((k == 1 || k == 2) && (xje == -1 || xie == -1))        
+                                if((k == 1 || k == 2) && (xje != -1 && xie != -1))        
                                         draw_all_content(xje, xie, t * 1000 + 100 + k, 0);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
