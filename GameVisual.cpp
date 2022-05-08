@@ -505,7 +505,6 @@ public:
                 }
                 if(t == ROCKET)
                 { 
-                    map->mo[xi][xj]->is_player_here = 0;
                     draw();
                     int tr;
                     for(int k = 0; k < 3; k++)
@@ -513,14 +512,14 @@ public:
                                 tr = 0;
                                 //animation is wrong:: highlights 2 ceils and draws false treasure
                                 draw_all_content(xj, xi, t * 1000 + k, tr);
-                                if(xj + 2 >= 1 && xj + 2 <= 9 && xi + 2 >= 1 && xi + 2 <= 9)
-                                         draw_all_content(xj + 2, xi + 2, t * 1000 + k, tr);
-                                if(xj - 2 >= 1 && xj - 2 <= 9 && xi + 2 >= 1 && xi + 2 <= 9)
-                                         draw_all_content(xj - 2, xi + 2, t * 1000 + k, tr);
-                                if(xj + 2 >= 1 && xj + 2 <= 9 && xi - 2 >= 1 && xi - 2 <= 9)
-                                         draw_all_content(xj + 2, xi - 2, t * 1000 + k, tr);
-                                if(xj - 2 >= 1 && xj - 2 <= 9 && xi - 2 >= 1 && xi - 2 <= 9)
-                                         draw_all_content(xj - 2, xi - 2, t * 1000 + k, tr);
+                                if(xj + 2 >= 1 && xj + 2 <= 9)
+                                         draw_all_content(xj + 2, xi, t * 1000 + k, tr);
+                                if(xi + 2 >= 1 && xi + 2 <= 9)
+                                         draw_all_content(xj, xi + 2, t * 1000 + k, tr);
+                                if(xi - 2 >= 1 && xi - 2 <= 9)
+                                         draw_all_content(xj, xi - 2, t * 1000 + k, tr);
+                                if(xj - 2 >= 1 && xj - 2 <= 9)
+                                         draw_all_content(xj - 2, xi, t * 1000 + k, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
@@ -532,7 +531,6 @@ public:
                                 }
                                 sleep(1);
                     }
-                    map->mo[xi][xj]->is_player_here = 1;
                     
                 }
                 
