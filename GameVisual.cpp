@@ -241,6 +241,13 @@ public:
 
                                         if(map->mo[i][j]->vision() == 0)
                                         {
+                                            for(int ki = 2; ki < 8; ki++)
+                                                 {
+                                                for(int kj = 1; kj < 4; kj++)
+                                                {
+                                                        ch[(i-1)*4+ki][(j-1)*2+kj] = ' ';
+                                                }
+                                             }
                                             ch[(i-1)*4+6][(j-1)*2+2] = '?';
                                         }
                                         if(map->mo[i][j]->vision() == 1)
@@ -360,6 +367,7 @@ public:
                                 {
                                     if(i % 2 == 1)
                                     {
+                                            
                                             for(int ki = 4; ki < 6; ki++)
                                             {
                                                 ch[(i-1)*4+ki][2*j] = '?';
