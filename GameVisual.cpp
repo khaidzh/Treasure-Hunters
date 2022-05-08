@@ -390,9 +390,7 @@ public:
                         }
                         cout << endl;
                 }
-                //sleep(10);
                 map->transpose();
-                std::cout << "draw done\n"; sleep(3);
         }
         void updateStat(int turns, int hp, int armor)
         {
