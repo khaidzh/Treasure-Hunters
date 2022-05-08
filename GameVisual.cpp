@@ -78,6 +78,28 @@ public:
             {
                     s = "******************";
             }
+                
+            if(t == POTION * 1000)
+            {
+                    s = " R    /W     M    ";
+            }
+            if(t == POTION * 1000 + 1)
+            {
+                    s = " P   /W\\     M    ";
+            }
+            if(t == POTION * 1000 + 2)
+            {
+                    s = " P    /M\\    M    ";
+            }
+            if(t == POTION * 1000 + 101)
+            {
+                    s = "* * * * * * * * * ";
+            }
+            if(t == POTION * 1000 + 102)
+            {
+                    s = " * * * * * * * * *";
+            }
+                
             if(t == ROCKET * 1000)
             {
                     s = "* * * * * * * * * ";
@@ -473,7 +495,7 @@ public:
                     for(int k = 0; k < 3; k++)
                     {
                                 tr = 0;
-                                if(map->mo[xi][xj]->getCT() >= 2 && map->mo[xi][xj]->getCT() <= 4)
+                                if(map->mo[xi][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
                                         tr = 1;
                                 draw_all_content(xj, xi, t * 1000 + k, tr);
                                 system("clear");
@@ -498,7 +520,7 @@ public:
                     for(int k = 0; k < 3; k++)
                     {
                                 tr = 0;
-                                if(map->mo[xi][xj]->getCT() >= 2 && map->mo[xi][xj]->getCT() <= 4)
+                                if(map->mo[xi][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
                                         tr = 1;
                                 draw_all_content(xj, xi, t * 1000 + k, tr);
                                 if(k == 2)
@@ -547,6 +569,32 @@ public:
                     }
                     
                 }
+                if(t == POTION)
+                { 
+                    draw();
+                    int tr;
+                    for(int k = 0; k < 3; k++)
+                    {
+                                tr = 0;
+                                if(map->mo[xi][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
+                                        tr = 1;
+                                draw_all_content(xj, xi, t * 1000 + k, tr);
+                                if(k == 1 || k == 2)
+                                        draw_all_content(xje, xie, t * 1000 + 100 + k, 0);
+                                system("clear");
+                                for(int j = 0; j < 21; j++)
+                                {
+                                for(int i = 0; i < 60; i++)
+                                {
+                                      cout << ch[i][j];
+                                }
+                                cout << endl;
+                                }
+                                sleep(1);
+                    }
+                    
+                }
+                
                 
         }
 };
