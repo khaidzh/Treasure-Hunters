@@ -80,7 +80,7 @@ void Field::activatedBy(Player* player)
 	switch(content->getID())
 	{
 		case MINE:
-			player->getDamaged(MINE_DAMAGE);
+			player->takeDamage(MINE_DAMAGE);
 
  			delete content;
 			content = new Nothing;
@@ -92,7 +92,7 @@ void Field::activatedBy(Player* player)
 			content = new Nothing;
 			break;
 		case PIT:
-			player->getDamaged(PIT_DAMAGE);
+			player->takeDamage(PIT_DAMAGE);
 			player->addMove(3);
 
  			delete content;

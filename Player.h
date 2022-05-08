@@ -36,7 +36,8 @@ public:
 	std::pair<int, int> getPosition() const;
 
 	void addMove(int number = 1);
-	void getDamaged(int damage);
+	void addArmor(int armor);
+	void takeDamage(int damage);
 	//void setEquipment();
 
 	bool isAlive() const;

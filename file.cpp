@@ -20,27 +20,28 @@ class MapObject;
 
 int main()
 {
-		//edit_map
-        //encrypt() decipher()
-        char cipher[] = "c4c4c4c4c4c0 0t0f0d0m4c1c3c1c3c0c4 0 0 0w0p4c0c2c2c2c2c4 0 0 2 0 4c2c2c0c0c0c4 0 2 0 2 4c0c2c2c2c0c4 0 0 0 0 4c4c4c4c4c4c";
-        Map map(cipher);
-        GameVisual visual(&map);
-        Player player(&visual, 1, 1);
-        
-        player.inventory[0] = std::make_pair(HAMMER, 1);
-        player.inventory[1] = std::make_pair(BAIT, 100);
-        player.inventory[2] = std::make_pair(GRENADE, 100);
-        player.inventory[3] = std::make_pair(ROCKET, 100);
-        player.inventory[4] = std::make_pair(POTION, 100);
+	//Map edit;
+	//edit_map
+    //encrypt() decipher()
+    char cipher[] = "c4c4c4c4c4c0 0t0f0d0m4c2c2c2c2c0c4 0 0 0w0p4c0c0c2c2c2c4 0 0 2 0 4c0c0c0c0c0c4 0 0 0 0 4c0c2c2c2c0c4 0 0 0 0 4c4c4c4c4c4c";
+    Map map(cipher);
+    GameVisual gv(&map);
+    Player player(&gv, 1, 1);
+    
+    player.inventory[0] = std::make_pair(HAMMER, 1);
+    player.inventory[1] = std::make_pair(CROSSBOW, 100);
+    player.inventory[2] = std::make_pair(GRENADE, 100);
+    player.inventory[3] = std::make_pair(ROCKET, 100);
+    player.inventory[4] = std::make_pair(POTION, 100);
 
-        while (player.isPlaying())
-        {
-            visual.draw();
-            int c = getch();
-            player.move(c);
-        }
-        visual.draw();
-        std::cout << ((player.isAlive()) ? "WIN" : "DEFEAT") << endl;
+    while (player.isPlaying())
+    {
+        gv.draw();
+        int c = getch();
+        player.move(c);
+    }
+    gv.draw();
+    std::cout << ((player.isAlive()) ? "WIN" : "DEFEAT") << endl;
 
 
 

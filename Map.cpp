@@ -1,9 +1,9 @@
-Map::Map()
-{
-	//empty
-}
+// Map::Map()
+// {
+// 	//empty
+// }
 
-Map::Map(int code)
+Map::Map()
 {
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
@@ -44,23 +44,18 @@ Map::Map(const char code[MAP_SIZE * MAP_SIZE + 1])
 				break;
 			case '1':
 				mo[i][j] = new Wall(CORRUPTED_WOOD_WALL);
-				//mo[i][j]->setCT(CORRUPTED_WOOD_WALL);
 				break;
 			case '2':
 				mo[i][j] = new Wall(WOOD_WALL);
-				//mo[i][j]->setCT(WOOD_WALL);
 				break;
 			case '3':
 				mo[i][j] = new Wall(CORRUPTED_IRON_WALL);
-				//mo[i][j]->setCT(CORRUPTED_IRON_WALL);
 				break;
 			case '4':
 				mo[i][j] = new Wall(IRON_WALL);
-				//mo[i][j]->setCT(IRON_WALL);
 				break;
 			case ' ':
 				mo[i][j] = new Field();
-				//mo[i][j]->setCT();
 				break;
 			case 's':
 				mo[i][j] = new Field();
@@ -71,23 +66,18 @@ Map::Map(const char code[MAP_SIZE * MAP_SIZE + 1])
 				break;
 			case 'f':
 				mo[i][j] = new Field(FALSE_TREASURE);
-				//mo[i][j]->setCT();
 				break;
 			case 'd':
 				mo[i][j] = new Field(MINED_TREASURE);
-				//mo[i][j]->setCT();
 				break;
 			case 'm':
 				mo[i][j] = new Field(MINE);
-				//mo[i][j]->setCT();
 				break;
 			case 'p':
 				mo[i][j] = new Field(PIT);
-				//mo[i][j]->setCT();
 				break;
 			case 'w':
 				mo[i][j] = new Field(WEB);
-				//mo[i][j]->setCT();
 				break;
 		}
 }
@@ -117,10 +107,15 @@ void Map::discoverField(int i, int j)
 }
 
 
-void Map::destroyField(int i, int j)
+void Map::destroyField(int& hp, int i, int j)
 {
-	if (mo[i][j]->getCT() != TREASURE)
-		mo[i][j]->setCT(NOTHING);
+	if (mo[i][j]->getCT() == TREASURE)
+	{
+		hp = 0;
+		std::cout << "Treasure has been blowed up!\n";
+		sleep(1);
+	}
+	mo[i][j]->setCT(NOTHING);
 	mo[i - 1][j]->setCT(EMPTY);
 	mo[i + 1][j]->setCT(EMPTY);
 	mo[i][j - 1]->setCT(EMPTY);
@@ -187,27 +182,6 @@ char* Map::encode() const
 	return code;
 }
 
-
-/*
-Wall* Map::topWall(int i, int j)
-{
-	return &wall[i * 2][j];
-}
-Wall* Map::bottomWall(int i, int j)
-{
-	return &wall[i * 2 + 2][j];
-}
-Wall* Map::leftWall(int i, int j)
-{
-	return &wall[i * 2 + 1][j];
-}
-Wall* Map::rightWall(int i, int j)
-{
-	return &wall[i * 2 + 1][j + 1];
-}
-*/
-
-
 void Map::transpose()
 {
 	for (int i = 0; i < MAP_SIZE; i++)
@@ -219,6 +193,3 @@ void Map::transpose()
 			tmp = nullptr;
 		}
 }
-
-//template<typename T>
-//void std::swap(T& a, T& b);

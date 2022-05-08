@@ -33,7 +33,7 @@ int Player::check(bool& code)
 			break;
 		case MINED_TREASURE:
 			gv->treasureAnimate(i, j, MINED_TREASURE);
-			getDamaged(2);
+			takeDamage(MINE_DAMAGE);
 			break;
 		default:
 			code = false;
@@ -73,19 +73,18 @@ int Player::move(int action, bool repeat)
 	{
 		map->discoverField(i, j);
 		map->getField(i, j)->activatedBy(this);
-		addMove();
-		gv->updateStat(number_of_moves, hp, armor);
+		if (!repeat)
+			addMove();
+		gv->updateStat(number_of_moves, hp, armor);//////////////////////////
+		gv->draw();
 		if (!repeat && isShod)
 		{
-			gv->draw();
 			std::cout << "Press the same key to repeat the move\n";
 			if (action == (int)getch())
 				move(action, true);
 		}
-		std::cout << "Hod sdelan1\n"; sleep(3);
 		return action;
 	}
-		std::cout << "Hod sdelan2\n"; sleep(3);
 
 	if (action == PICKUP && treasure == NOTHING)
 	{
@@ -93,24 +92,25 @@ int Player::move(int action, bool repeat)
 		treasure = map->getField(i, j)->getCT();
 		map->getField(i, j)->setCT(NOTHING);
 		addMove();
-		gv->updateStat(number_of_moves, hp, armor);
+		gv->updateStat(number_of_moves, hp, armor);//////////////////////
+		gv->draw();
 		return action;
 	}
 
-	code = useItem(action - '0' - 1);
+	if (action >= '1' && action <= '5')
+		code = useItem(action - '1');
 
 	if (code)
+	{
 		addMove();
-	// if (code)
-	// {
-	// 	addMove();
-	// 	gv->updateStat(number_of_moves, hp, armor);
-	// }
+		gv->updateStat(number_of_moves, hp, armor);//////////////////
+		gv->draw();
+	}
 
 	return action;
 }
 
-void Player::getDamaged(int damage)
+void Player::takeDamage(int damage)
 {
 	if (damage == MINE_DAMAGE && isShod)
 	{
@@ -139,10 +139,10 @@ void Player::addMove(int number)
 	number_of_moves += number;
 }
 
-// void Player::addArmor()
-// {
-// 	this->armor += armor;
-// }
+void Player::addArmor(int armor)
+{
+	this->armor += armor;
+}
 
 bool Player::isAlive() const
 {
@@ -162,39 +162,75 @@ bool Player::useItem(int n)
 	int direction, ii, jj;
 	switch(inventory[n].first)
 	{
-		// case CROSSBOW:
-		// 	int direction = getch();
-		// 	itemAnimation(CROSSBOW, i, j, end_i, end_j);
-		// 	break;
-		case BAIT:
+		case CROSSBOW:
+			std::cout << "Using the crossbow" << std::endl;
 			direction = getch();
+			ii = i, jj = j;
 			switch(direction)
 			{
 				case UP:
-					gv->itemAnimation(BAIT, i, j, i - 2, j);
-					map->getField(i - 2, j)->activate(gv, i - 2, j);
-
+					while (map->getWall(ii - 1, jj)->isEmpty() && ii != TOP_BORDER)
+						ii -= 2;
+					gv->itemAnimation(CROSSBOW, i, j, 0, i - ii);
+					map->getWall(ii - 1, jj)->setCT(EMPTY);
 					break;
 				case DOWN:
-					gv->itemAnimation(BAIT, i, j, i + 2, j);
-					map->getField(i + 2, j)->activate(gv, i + 2, j);
-
+					while (map->getWall(ii + 1, jj)->isEmpty() && ii != BOTTOM_BORDER)
+						ii += 2;
+					gv->itemAnimation(CROSSBOW, i, j, 2, ii - i);
+					map->getWall(ii + 1, jj)->setCT(EMPTY);
 					break;
 				case LEFT:
-					gv->itemAnimation(BAIT, i, j, i, j - 2);
-					map->getField(i, j - 2)->activate(gv, i, j - 2);
-
+					while (map->getWall(ii, jj - 1)->isEmpty() && jj != LEFT_BORDER)
+						jj -= 2;
+					gv->itemAnimation(CROSSBOW, i, j, 1, j - jj);
+					map->getWall(ii, jj - 1)->setCT(EMPTY);
 					break;
 				case RIGHT:
-					gv->itemAnimation(BAIT, i, j, i, j + 2);
-					map->getField(i, j + 2)->activate(gv, i, j + 2);
-
+					while (map->getWall(ii, jj + 1)->isEmpty() && jj != RIGHT_BORDER)
+						jj += 2;
+					gv->itemAnimation(CROSSBOW, i, j, 3, jj - j);
+					map->getWall(ii, jj + 1)->setCT(EMPTY);
 					break;
 				default:
 					return false;
 			}
 			break;
-		case HAMMER:                                             //ne tratitsya
+		case BAIT:
+			std::cout << "Using the bait" << std::endl;
+			direction = getch();
+			switch(direction)
+			{
+				case UP:
+					if (i == TOP_BORDER)
+						return false;
+					gv->itemAnimation(BAIT, i, j, i - 2, j);
+					map->getField(i - 2, j)->activate(gv, i - 2, j);
+					break;
+				case DOWN:
+					if (i == BOTTOM_BORDER)
+						return false;
+					gv->itemAnimation(BAIT, i, j, i + 2, j);
+					map->getField(i + 2, j)->activate(gv, i + 2, j);
+					break;
+				case LEFT:
+					if (j == LEFT_BORDER)
+						return false;
+					gv->itemAnimation(BAIT, i, j, i, j - 2);
+					map->getField(i, j - 2)->activate(gv, i, j - 2);
+					break;
+				case RIGHT:
+					if (j == RIGHT_BORDER)
+						return false;
+					gv->itemAnimation(BAIT, i, j, i, j + 2);
+					map->getField(i, j + 2)->activate(gv, i, j + 2);
+					break;
+				default:
+					return false;
+			}
+			break;
+		case HAMMER:
+			std::cout << "Using the hammer" << std::endl;
 			direction = getch();
 			switch(direction)
 			{
@@ -215,6 +251,7 @@ bool Player::useItem(int n)
 			}
 			break;
 		case ROCKET:
+			std::cout << "Using the rocket\nThe left top field has (1, 1)" << std::endl;
 			std::cout << "Enter vertical coordinates\n";
 			ii = 2 * (getch() - '0') - 1;
 			std::cout << "Enter horizontal coordinates\n";
@@ -235,6 +272,7 @@ bool Player::useItem(int n)
 
 			break;
 		case GRENADE:
+			std::cout << "Using the grenade" << std::endl;
 			direction = getch();
 			switch(direction)
 			{
@@ -242,53 +280,68 @@ bool Player::useItem(int n)
 					if (i == TOP_BORDER)
 						return false;
 					gv->itemAnimation(GRENADE, i, j, i - 2, j);
-					map->destroyField(i - 2, j);
+					map->destroyField(hp, i - 2, j);
 					break;
 				case DOWN:
 					if (i == BOTTOM_BORDER)
 						return false;
 					gv->itemAnimation(GRENADE, i, j, i + 2, j);
-					map->destroyField(i + 2, j);
+					map->destroyField(hp, i + 2, j);
 					break;
 				case LEFT:
 					if (j == LEFT_BORDER)
 						return false;
 					gv->itemAnimation(GRENADE, i, j, i, j - 2);
-					map->destroyField(i, j - 2);
+					map->destroyField(hp, i, j - 2);
 					break;
 				case RIGHT:
 					if (j == RIGHT_BORDER)
 						return false;
 					gv->itemAnimation(GRENADE, i, j, i, j + 2);
-					map->destroyField(i, j + 2);
+					map->destroyField(hp, i, j + 2);
 					break;
 				default:
 					return false;
 			}
 			break;
 		case POTION:
+			std::cout << "Using the potion" << std::endl;
 			direction = getch();
 			switch(direction)
 			{
 				case UP:
+					if (!(i == TOP_BORDER) && map->getWall(i - 1, j)->isEmpty())
+						map->discoverField(i - 2, j);
 					gv->itemAnimation(POTION, i, j, i - 2, j);
-					hp++;
-					map->getField(i - 2, j)->discover();
+					//else
+					//	gv->itemAnimation(POTION, i, j, -1, -1);
+					hp += 2;
+					if (hp > 3)
+						hp = 3;
 					break;
 				case DOWN:
+					if (!(i == BOTTOM_BORDER) && map->getWall(i + 1, j)->isEmpty())
+						map->discoverField(i + 2, j);
 					gv->itemAnimation(POTION, i, j, i + 2, j);
-					hp++;
-					map->getField(i + 2, j)->discover();
+					hp += 2;
+					if (hp > 3)
+						hp = 3;
 					break;
 				case LEFT:
+					if (!(i == LEFT_BORDER) && map->getWall(i, j - 1)->isEmpty())
+						map->discoverField(i, j - 2);
 					gv->itemAnimation(POTION, i, j, i, j - 2);
-					hp++;
-					map->getField(i, j - 2)->discover();
+					hp += 2;
+					if (hp > 3)
+						hp = 3;
 					break;
 				case RIGHT:
+					if (!(j == RIGHT_BORDER) && map->getWall(i, j + 1)->isEmpty())
+						map->discoverField(i, j + 2);
 					gv->itemAnimation(POTION, i, j, i, j + 2);
-					hp++;
-					map->getField(i, j + 2)->discover();
+					hp += 2;
+					if (hp > 3)
+						hp = 3;
 					break;
 				case 'm':
 					hp++;

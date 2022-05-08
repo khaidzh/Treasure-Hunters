@@ -83,7 +83,7 @@ public:
 	MapObject* mo[MAP_SIZE][MAP_SIZE];
 
 	Map();
-	Map(int code);
+	//Map(int code);
 	Map(const char code[MAP_SIZE * MAP_SIZE + 1]);
 
 	~Map();
@@ -95,7 +95,7 @@ public:
 	Column* getColumn(int i, int j);
 
 	void discoverField(int i, int j);
-	void destroyField(int i, int j);
+	void destroyField(int& hp, int i, int j);
 	// Wall* topWall(int i, int j);
 	// Wall* bottomWall(int i, int j);
 	// Wall* leftWall(int i, int j);
