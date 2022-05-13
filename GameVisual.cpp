@@ -615,12 +615,10 @@ public:
                     map->mo[xi][xj]->is_player_here = 0;
                     draw();
                     int tr;
-                    for(int k = 2; k < xje; k++)
+                    for(int k = 2; k <= xje; k = k + 2)
                     {
                                 tr = 0;
-                                if(map->mo[xi][xj + xje * (-1 + xie)]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
-                                        tr = 1;
-                                draw_all_content(xj + xje * (-1 + xie), xi, t * 1000 + xie, tr);
+                                draw_all_content(xj + k * (-1 + xie), xi, t * 1000 + xie, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
@@ -639,12 +637,10 @@ public:
                 { 
                     draw();
                     int tr;
-                    for(int k = 2; k < xje; k++)
+                    for(int k = 2; k <= xje; k = k + 2)
                     {
                                 tr = 0;
-                                if(map->mo[xi + xje * (-2 + xie)][xj]->getCT() >= 1 && map->mo[xi][xj]->getCT() <= 3)
-                                        tr = 1;
-                                draw_all_content(xj, xi + xje * (-2 + xie), t * 1000 + k, tr);
+                                draw_all_content(xj, xi + k * (-2 + xie), t * 1000 + xie, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
