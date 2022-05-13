@@ -13,8 +13,7 @@ Field::~Field()
 
 Field::Field(int placed_item_ID)
 {
-	is_discovered = false;
-	is_player_here = false;	
+	Field();
 	setCT(placed_item_ID);
 }
 
