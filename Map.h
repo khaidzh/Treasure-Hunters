@@ -22,8 +22,8 @@ protected:
 	bool is_discovered;
 public:
 	bool is_player_here;
-	bool is_pointed;
-	bool vision() const;
+	bool is_marker_here;
+	virtual bool vision() const;
 	void discover();
 
 	virtual void setCT(int ct) = 0;
@@ -41,6 +41,7 @@ public:
 	Field(int placed_item_ID);
 	~Field();
 
+	//virtual bool vision() const final;
 	bool activate(GameVisual* gv, int i, int j);
 	void activatedBy(Player* player);
 

@@ -20,6 +20,8 @@ class MapObject;
 
 int main()
 {
+	//int equipment[];
+	//int money = 10;
 	//Map edit;
 	//edit_map
     //encrypt() decipher()
@@ -46,10 +48,10 @@ int main()
 
 
 
-        /////////////////////////////
-        char* cipher_ = map.encode();
-        for (int i = 0; i < MAP_SIZE * MAP_SIZE; i++)
-        	std::cout << cipher_[i];
-        std::cout << std::endl;
-       	delete[] cipher_;
+    /////////////////////////////
+    char* cipher_ = map.encode();
+    for (int i = 0; i < MAP_SIZE * MAP_SIZE; i++)
+      	std::cout << cipher_[i];
+    std::cout << std::endl;
+    delete[] cipher_;
 }

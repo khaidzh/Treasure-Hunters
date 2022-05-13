@@ -8,9 +8,15 @@ Map::Map()
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
 			if (i % 2 == 1 && j % 2 == 1)
+			{
 				mo[i][j] = new Field;
+				mo[i][j]->discover();
+			}
 			else if (i % 2 == 1 || j % 2 == 1)
+			{
 				mo[i][j] = new Wall;
+				mo[i][j]->discover();
+			}
 			else 
 				mo[i][j] = new Column;
 

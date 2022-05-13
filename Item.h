@@ -1,4 +1,4 @@
-enum PlacedItemID
+enum ItemID
 {
 	NOTHING,
 	TREASURE,
@@ -6,11 +6,7 @@ enum PlacedItemID
 	MINED_TREASURE,
 	MINE,
 	PIT,
-	WEB
-};
-
-enum HandItemID
-{
+	WEB,
 	CROSSBOW,
 	BAIT,
 	HAMMER,
@@ -19,6 +15,16 @@ enum HandItemID
 	POTION
 };
 
+// enum HandItemID
+// {
+// 	CROSSBOW,
+// 	BAIT,
+// 	HAMMER,
+// 	ROCKET,
+// 	GRENADE,
+// 	POTION
+// };
+
 enum ItemDamage
 {
 	NULL_DAMAGE,
@@ -26,28 +32,30 @@ enum ItemDamage
 	MINE_DAMAGE
 };
 
-class Item
+// class Item
+// {
+// protected:
+// 	int cost;
+// 	//int available_number;
+// public:
+// 	//Item();
+// 	//void purchase();
+// };
+
+class PlacedItem
 {
 protected:
-	int cost;
-	//int available_number;
-public:
-	//Item();
-	//void purchase();
-};
-
-class PlacedItem : public Item
-{
-private:
 	bool visionable;
+	//int cost;
 public:
 	bool vision();
 	void discover();
 	virtual int getID() const = 0;
+	//virtual void purchase() const = 0;
 	//virtual activation() = 0;
 };
 
-class HandItem : public Item
+class HandItem
 {
 	//virtual usage() = 0;
 };
@@ -55,7 +63,7 @@ class HandItem : public Item
 class Nothing : public PlacedItem
 {
 public:
-	//Nothing();
+	Nothing();
 	//~Nothing();
 	virtual int getID() const;
 	
@@ -64,7 +72,7 @@ public:
 class Treasure : public PlacedItem
 {
 public:
-	//Treasure();
+	Treasure();
 	//~Treasure();
 	virtual int getID() const;
 	
@@ -73,7 +81,7 @@ public:
 class FalseTreasure : public PlacedItem
 {
 public:
-	//FalseTreasure();
+	FalseTreasure();
 	//~FalseTreasure();
 	virtual int getID() const;
 	
@@ -81,7 +89,8 @@ public:
 
 class MinedTreasure : public PlacedItem
 {
-	//MinedTreasure();
+public:
+	MinedTreasure();
 	//~MinedTreasure();
 	virtual int getID() const;
 
@@ -90,7 +99,7 @@ class MinedTreasure : public PlacedItem
 class Mine : public PlacedItem
 {
 public:
-	//Mine();
+	Mine();
 	//~Mine();
 	virtual int getID() const;
 	
@@ -99,61 +108,17 @@ public:
 class Pit : public PlacedItem
 {
 public:
-	//Pit();
+	Pit();
 	//~Pit();
 	virtual int getID() const;
 	
 };
 
-// class IronWall
-// {
-// public:
-// 	IronWall();
-// 	~IronWall();
-// 	virtual getID() const;
-	
-// };
-
 class Web : public PlacedItem
 {
 public:
-	//Web();
+	Web();
 	//~Web();
 	virtual int getID() const;
 	
 };
-
-
-
-
-
-
-
-
-
-
-
-class Boots
-{
-public:
-	Boots();
-	~Boots();
-	
-};
-
-class Armor
-{
-public:
-	Armor();
-	~Armor();
-	
-};
-
-class MetalDetector
-{
-public:
-	MetalDetector();
-	~MetalDetector();
-	
-};
-

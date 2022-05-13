@@ -2,6 +2,7 @@ Field::Field()
 {
 	is_discovered = false;
 	is_player_here = false;	
+	is_marker_here = false;	
 	content = new Nothing;
 }
 
