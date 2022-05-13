@@ -277,7 +277,7 @@ public:
                                             ch[(i-1)*4+3][(j-1)*2+3] = ' ';
                                         }
 
-                                        if(map->mo[i][j]->getContent()->vision() == 0)
+                                        if(map->mo[i][j]->vision() == 0)
                                         {
                                             for(int ki = 2; ki < 8; ki++)
                                                  {
@@ -288,7 +288,7 @@ public:
                                              }
                                             ch[(i-1)*4+6][(j-1)*2+2] = '?';
                                         }
-                                        if(map->mo[i][j]->getContent()->vision() == 1)
+                                        if(map->mo[i][j]->vision() == 1)
                                         {
                                             draw_content(i, j, map->mo[i][j]->getCT());
                                         }
