@@ -277,7 +277,7 @@ public:
                                             ch[(i-1)*4+3][(j-1)*2+3] = ' ';
                                         }
 
-                                        if(map->mo[i][j]->vision() == 0)
+                                        if(map->mo[i][j]->getContent()->vision() == 0)
                                         {
                                             for(int ki = 2; ki < 8; ki++)
                                                  {
@@ -288,7 +288,7 @@ public:
                                              }
                                             ch[(i-1)*4+6][(j-1)*2+2] = '?';
                                         }
-                                        if(map->mo[i][j]->vision() == 1)
+                                        if(map->mo[i][j]->getContent()->vision() == 1)
                                         {
                                             draw_content(i, j, map->mo[i][j]->getCT());
                                         }
@@ -619,6 +619,9 @@ public:
                     {
                                 tr = 0;
                                 draw_all_content(xj, xi + k * (-1 + xie), t * 1000 + xie, tr);
+                                //HGHGHGHG
+                                map->discoverField(xi, xj + k * (-2 + xie));
+                                //GHGHGHGHGH
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
@@ -641,6 +644,9 @@ public:
                     {
                                 tr = 0;
                                 draw_all_content(xj + k * (-2 + xie), xi, t * 1000 + xie, tr);
+                                //HGHGHGHG
+                                map->discoverField(xi, xj + k * (-2 + xie));
+                                //GHGHGHGHGH
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
