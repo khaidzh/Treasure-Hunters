@@ -20,11 +20,6 @@ class MapObject;
 
 int main()
 {
-	//int equipment[];
-	//int money = 10;
-	//Map edit;
-	//edit_map
-    //encrypt() decipher()
     char cipher[] = "c4c4c4c4c4c0 0t0f0d0m4c2c2c2c2c0c4 0 0 0w0p4c0c0c2c2c2c4 0 0 2 0 4c0c0c0c0c0c4 0 0 0 0 4c0c2c2c2c0c4 0 0 0 0 4c4c4c4c4c4c";
     Map map(cipher);
     GameVisual gv(&map);
@@ -50,8 +45,5 @@ int main()
 
     /////////////////////////////
     char* cipher_ = map.encode();
-    for (int i = 0; i < MAP_SIZE * MAP_SIZE; i++)
-      	std::cout << cipher_[i];
-    std::cout << std::endl;
-    delete[] cipher_;
+    free(cipher_);
 }

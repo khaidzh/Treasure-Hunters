@@ -60,7 +60,7 @@ Map::Map(const char code[MAP_SIZE * MAP_SIZE + 1])
 			case '4':
 				mo[i][j] = new Wall(IRON_WALL);
 				break;
-			case ' ':
+			case '_':
 				mo[i][j] = new Field();
 				break;
 			case 's':
@@ -143,7 +143,7 @@ c4c4c4c4c4c
 
 char* Map::encode() const
 {
-	char* code = new char[MAP_SIZE * MAP_SIZE + 1];
+	char* code = (char *)malloc(MAP_SIZE * MAP_SIZE + 2);
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
 		{
@@ -160,7 +160,7 @@ char* Map::encode() const
 					switch(mo[i][j]->getCT())
 					{
 						case NOTHING:
-							c = ' ';
+							c = '_';
 							break;
 						case TREASURE:
 							c = 't';
@@ -185,6 +185,7 @@ char* Map::encode() const
 			}
 		}
 	code[MAP_SIZE * MAP_SIZE] = '\n';
+	code[MAP_SIZE * MAP_SIZE + 1] = '\0';
 	return code;
 }
 

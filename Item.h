@@ -6,7 +6,11 @@ enum ItemID
 	MINED_TREASURE,
 	MINE,
 	PIT,
-	WEB,
+	WEB
+};
+
+enum HandItemID
+{
 	CROSSBOW,
 	BAIT,
 	HAMMER,
@@ -14,16 +18,6 @@ enum ItemID
 	GRENADE,
 	POTION
 };
-
-// enum HandItemID
-// {
-// 	CROSSBOW,
-// 	BAIT,
-// 	HAMMER,
-// 	ROCKET,
-// 	GRENADE,
-// 	POTION
-// };
 
 enum ItemDamage
 {

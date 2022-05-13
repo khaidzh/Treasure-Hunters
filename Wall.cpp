@@ -1,11 +1,13 @@
 Wall::Wall()
 {
+	is_marker_here = false;
 	is_discovered = false;
 	type = EMPTY;
 }
 
 Wall::Wall(int type) : type(type)
 {
+	is_marker_here = false;
 	is_discovered = false;
 }
 

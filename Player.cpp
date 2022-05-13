@@ -172,25 +172,25 @@ bool Player::useItem(int n)
                     while (map->getWall(ii - 1, jj)->isEmpty() && ii != TOP_BORDER)
                         ii -= 2;
                     gv->itemAnimation(CROSSBOW, i, j, 0, i - ii);
-                    map->getWall(ii - 1, jj)->setCT(EMPTY);
+                    map->getWall(ii - 1, jj)->damage(2);
                     break;
                 case DOWN:
                     while (map->getWall(ii + 1, jj)->isEmpty() && ii != BOTTOM_BORDER)
                         ii += 2;
                     gv->itemAnimation(CROSSBOW, i, j, 2, ii - i);
-                    map->getWall(ii + 1, jj)->setCT(EMPTY);
+                    map->getWall(ii + 1, jj)->damage(2);
                     break;
                 case LEFT:
                     while (map->getWall(ii, jj - 1)->isEmpty() && jj != LEFT_BORDER)
                         jj -= 2;
                     gv->itemAnimation(CROSSBOW, i, j, 1, j - jj);
-                    map->getWall(ii, jj - 1)->setCT(EMPTY);
+                    map->getWall(ii, jj - 1)->damage(2);
                     break;
                 case RIGHT:
                     while (map->getWall(ii, jj + 1)->isEmpty() && jj != RIGHT_BORDER)
                         jj += 2;
                     gv->itemAnimation(CROSSBOW, i, j, 3, jj - j);
-                    map->getWall(ii, jj + 1)->setCT(EMPTY);
+                    map->getWall(ii, jj + 1)->damage(2);
                     break;
                 default:
                     return false;
