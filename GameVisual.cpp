@@ -620,7 +620,7 @@ public:
                                 tr = 0;
                                 draw_all_content(xj, xi + k * (-1 + xie), t * 1000 + xie, tr);
                                 //HGHGHGHG
-                                map->discoverField(xi, xj + k * (-2 + xie));
+                                map->discoverField(xi + k * (-1 + xie), xj);
                                 //GHGHGHGHGH
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
