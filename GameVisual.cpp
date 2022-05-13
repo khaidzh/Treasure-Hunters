@@ -618,7 +618,7 @@ public:
                     for(int k = 2; k <= xje; k = k + 2)
                     {
                                 tr = 0;
-                                draw_all_content(xj + k * (-1 + xie), xi, t * 1000 + xie, tr);
+                                draw_all_content(xj, xi + k * (-1 + xie), t * 1000 + xie, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
@@ -640,7 +640,7 @@ public:
                     for(int k = 2; k <= xje; k = k + 2)
                     {
                                 tr = 0;
-                                draw_all_content(xj, xi + k * (-2 + xie), t * 1000 + xie, tr);
+                                draw_all_content(xj + k * (-2 + xie), xi, t * 1000 + xie, tr);
                                 system("clear");
                                 for(int j = 0; j < 21; j++)
                                 {
