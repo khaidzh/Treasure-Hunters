@@ -1,8 +1,3 @@
-//void Item::purchase()
-//{
-	//money -= cost;
-//}
-
 bool PlacedItem::vision()
 {
 	return visionable;
@@ -67,7 +62,7 @@ int Pit::getID() const
 {
 	return PIT;
 }
-//----------------------------//
+
 Web::Web()
 {
 	visionable = false;

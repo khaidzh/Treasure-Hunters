@@ -28,7 +28,7 @@ private:
 	int detector;
 	bool isShod;
 public:
-	std::pair<int, int> inventory[5]; //(ID, number)
+	std::pair<int, int> inventory[6]; //(ID, number)
 	Player(GameVisual* gv, int i, int j); //Map& map
 	~Player();
 

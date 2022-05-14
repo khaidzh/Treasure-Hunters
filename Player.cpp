@@ -97,7 +97,7 @@ int Player::move(int action, bool repeat)
         return action;
     }
 
-    if (action >= '1' && action <= '5')
+    if (action >= '1' && action <= '6')
         code = useItem(action - '1');
 
     if (code)

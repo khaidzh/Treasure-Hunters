@@ -5,7 +5,7 @@ private:
         char ch[60][21];
         Map* map;
 public:
-        GameVisual(Map* map /*mo[11][11]*/) : map(map)
+        GameVisual(Map* map) : map(map)
         {
                 for(int i = 0; i < 60; i++)
                 {
