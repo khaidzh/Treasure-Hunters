@@ -2,6 +2,7 @@ Field::Field()
 {
 	is_discovered = false;
 	is_player_here = false;	
+	is_marker_here = false;	
 	content = new Nothing;
 }
 
@@ -12,8 +13,7 @@ Field::~Field()
 
 Field::Field(int placed_item_ID)
 {
-	is_discovered = false;
-	is_player_here = false;	
+	Field();
 	setCT(placed_item_ID);
 }
 
@@ -100,8 +100,3 @@ void Field::activatedBy(Player* player)
 			break;
 	}
 }
-
-// PlacedItem* Field::getContent()
-// {
-// 	return content;
-// }

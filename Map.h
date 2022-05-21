@@ -22,8 +22,8 @@ protected:
 	bool is_discovered;
 public:
 	bool is_player_here;
-	bool is_pointed;
-	bool vision() const;
+	bool is_marker_here;
+	virtual bool vision() const;
 	void discover();
 
 	virtual void setCT(int ct) = 0;
@@ -41,6 +41,7 @@ public:
 	Field(int placed_item_ID);
 	~Field();
 
+	//virtual bool vision() const final;
 	bool activate(GameVisual* gv, int i, int j);
 	void activatedBy(Player* player);
 
@@ -83,7 +84,6 @@ public:
 	MapObject* mo[MAP_SIZE][MAP_SIZE];
 
 	Map();
-	//Map(int code);
 	Map(const char code[MAP_SIZE * MAP_SIZE + 1]);
 
 	~Map();
@@ -96,13 +96,8 @@ public:
 
 	void discoverField(int i, int j);
 	void destroyField(int& hp, int i, int j);
-	// Wall* topWall(int i, int j);
-	// Wall* bottomWall(int i, int j);
-	// Wall* leftWall(int i, int j);
-	// Wall* rightWall(int i, int j);
 
 	//isCorrect();
-	//void draw();
 
 	void transpose();
 };

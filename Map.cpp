@@ -1,16 +1,17 @@
-// Map::Map()
-// {
-// 	//empty
-// }
-
 Map::Map()
 {
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
 			if (i % 2 == 1 && j % 2 == 1)
+			{
 				mo[i][j] = new Field;
+				mo[i][j]->discover();
+			}
 			else if (i % 2 == 1 || j % 2 == 1)
+			{
 				mo[i][j] = new Wall;
+				mo[i][j]->discover();
+			}
 			else 
 				mo[i][j] = new Column;
 
@@ -54,7 +55,7 @@ Map::Map(const char code[MAP_SIZE * MAP_SIZE + 1])
 			case '4':
 				mo[i][j] = new Wall(IRON_WALL);
 				break;
-			case ' ':
+			case '_':
 				mo[i][j] = new Field();
 				break;
 			case 's':
@@ -121,11 +122,12 @@ void Map::destroyField(int& hp, int i, int j)
 	mo[i][j - 1]->setCT(EMPTY);
 	mo[i][j + 1]->setCT(EMPTY);
 }
+
 /*
 c4c4c4c4c4c
-0 0t0f0d0m4
+0_0t0f0d0m4
 c2c2c2c2c0c
-4 0 0 0w0p4
+4_0_0_0w0p4
 c0c0c2c2c2c
 4 0 0 2 0 4
 c0c0c0c0c0c
@@ -137,7 +139,7 @@ c4c4c4c4c4c
 
 char* Map::encode() const
 {
-	char* code = new char[MAP_SIZE * MAP_SIZE + 1];
+	char* code = (char *)malloc(MAP_SIZE * MAP_SIZE + 2);
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
 		{
@@ -154,7 +156,7 @@ char* Map::encode() const
 					switch(mo[i][j]->getCT())
 					{
 						case NOTHING:
-							c = ' ';
+							c = '_';
 							break;
 						case TREASURE:
 							c = 't';
@@ -179,6 +181,7 @@ char* Map::encode() const
 			}
 		}
 	code[MAP_SIZE * MAP_SIZE] = '\n';
+	code[MAP_SIZE * MAP_SIZE + 1] = '\0';
 	return code;
 }
 

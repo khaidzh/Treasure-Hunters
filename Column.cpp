@@ -15,7 +15,7 @@ int Column::getCT() const
 
 bool Column::isEmpty() const
 {
-	return false	;
+	return false;
 }
 
 
